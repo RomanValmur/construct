@@ -34,7 +34,7 @@
           fontFamily: `${activeFont.name}`,
         }"
       >
-      {{ textValue }}
+      {{ notNullTextValue }}
       </span>
     </div>
     <ul
@@ -44,45 +44,45 @@
       <li class="list-group-item">
         <label
           for="fontSizeRange"
-          class="form-label"
         >
         Размер шрифта:
         </label>
-        <input
+        <b-form-input
+          id="fontSizeRange"
+          ref="fontSizeRange"
           type="range"
-          class="form-range"
           min="16"
           max="128"
           step="1"
           value="72"
-          id="fontSizeRange"
           @input="this.updateFontSize"
-        >
+          v-model="fontSize"
+        ></b-form-input>
       </li>
       <li class="list-group-item">
         <label
           for="lineHeightRange"
-          class="form-label"
         >
           Межстрочный интервал:
         </label>
-        <input
+        <b-form-input
+          id="lineHeightRange"
+          ref="lineHeightRange"
           type="range"
-          class="form-range"
           min="16"
           max="128"
           step="1"
           value="72"
-          id="lineHeightRange"
           @input="this.updateLineHeight"
-        >
+          v-model="lineHeight"
+        ></b-form-input>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'ConstructExemplar',
@@ -102,10 +102,32 @@ export default {
       'fontSize',
       'lineHeight',
       'activeFont',
+      'notNullTextValue',
     ]),
+    fontSize: {
+      get() {
+        return this.$store.getters.fontSize;
+      },
+      set(value) {
+        this.$store.commit('updateFontSize', value);
+      },
+    },
+    lineHeight: {
+      get() {
+        return this.$store.getters.lineHeight;
+      },
+      set(value) {
+        this.$store.commit('updateLineHeight', value);
+      },
+    },
   },
   methods: {
-    ...mapActions(['updateFontSize', 'updateLineHeight']),
+    updateFontSize(value) {
+      this.fontSize = value;
+    },
+    updateLineHeight(value) {
+      this.lineHeight = value;
+    },
     pointerDownEvent(event) {
       this.isDrag = true;
       this.caclShifts(event);

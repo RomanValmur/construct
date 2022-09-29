@@ -1,12 +1,15 @@
 export default {
   state: {
-    textValue: 'Пример',
-    fontSize: '72',
-    lineHeight: '72',
+    textValue: '',
+    fontSize: 72,
+    lineHeight: 72,
   },
   getters: {
     textValue(state) {
       return state.textValue;
+    },
+    notNullTextValue(state) {
+      return state.textValue ? state.textValue : 'Введите текст';
     },
     fontSize(state) {
       return state.fontSize;
@@ -20,21 +23,21 @@ export default {
       state.textValue = value;
     },
     updateFontSize(state, value) {
-      state.fontSize = value;
+      state.fontSize = +value;
     },
     updateLineHeight(state, value) {
-      state.lineHeight = value;
+      state.lineHeight = +value;
     },
   },
   actions: {
     updateTextValue(context, value) {
       context.commit('updateTextValue', value);
     },
-    updateFontSize(context, event) {
-      context.commit('updateFontSize', event.target.value);
+    updateFontSize(context, value) {
+      context.commit('updateFontSize', value);
     },
-    updateLineHeight(context, event) {
-      context.commit('updateLineHeight', event.target.value);
+    updateLineHeight(context, value) {
+      context.commit('updateLineHeight', value);
     },
   },
 };

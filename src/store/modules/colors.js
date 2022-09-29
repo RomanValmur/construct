@@ -20,10 +20,17 @@ export default {
     setActiveColor(state, color) {
       state.activeColor = color;
     },
+    setDefaultActiveColor(state) {
+      const defaultColor = state.colors[0];
+      state.activeColor = defaultColor;
+    },
   },
   actions: {
     setActiveColor(context, color) {
       context.commit('setActiveColor', color);
+    },
+    setDefaultActiveColor(context) {
+      context.commit('setDefaultActiveColor');
     },
   },
 };

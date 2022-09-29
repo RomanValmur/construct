@@ -17,10 +17,17 @@ export default {
     setActiveFont(state, font) {
       state.activeFont = font;
     },
+    setDefaultActiveFont(state) {
+      const defaultFont = state.fonts[0];
+      state.activeFont = defaultFont;
+    },
   },
   actions: {
     setActiveFont(context, font) {
       context.commit('setActiveFont', font);
+    },
+    setDefaultActiveFont(context) {
+      context.commit('setDefaultActiveFont');
     },
   },
 };

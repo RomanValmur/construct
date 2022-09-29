@@ -6,12 +6,14 @@
       label-for="text"
     >
       <b-form-textarea
+        ref="text"
         id="text"
         placeholder="Введите надпись..."
         rows="0"
         max-rows="6"
         @input="this.updateTextValue"
-      ></b-form-textarea>
+        v-model="textValue"
+      >{{textValue}}</b-form-textarea>
     </b-form-group>
     <ConstructSurfaces/>
     <div class="row my-5">
@@ -20,11 +22,14 @@
       <ConstructFontsList/>
     </div>
     <div class="row">
-      <div class="d-flex justify-content-around col mb-5">
-        <div class="btn btn-danger">Сбросить</div>
+      <div class="col d-flex justify-content-around mb-5">
+        <div
+          class="btn btn-danger"
+          @click="resetConstruct"
+        >Сбросить</div>
         <div
           class="btn btn-primary"
-          @click="addNewDealToBitrix"
+          @click="addNewDealToBitrix(), resetConstruct()"
         >Отправить</div>
       </div>
     </div>
@@ -47,14 +52,37 @@ export default {
     ConstructSurfaces,
   },
   computed: {
-    ...mapGetters(['surfaces', 'dealAddUrl']),
+    ...mapGetters([
+      'surfaces',
+      'dealAddUrl',
+    ]),
+    textValue: {
+      get() {
+        return this.$store.getters.textValue;
+      },
+      set(value) {
+        return this.$store.commit('updateTextValue', value);
+      },
+    },
   },
   methods: {
-    ...mapActions(['updateTextValue']),
+    ...mapActions([
+      'updateTextValue',
+      'updateFontSize',
+      'updateLineHeight',
+      'setDefaultActiveColor',
+      'setDefaultActiveFont',
+    ]),
     addNewDealToBitrix() {
-      fetch(this.dealAddUrl)
-        .then(response => response.json())
-        .then(response => console.log(response));
+      fetch(this.dealAddUrl);
+    },
+    resetConstruct() {
+      this.updateTextValue('');
+      this.textValue = '';
+      this.updateFontSize(72);
+      this.updateLineHeight(72);
+      this.setDefaultActiveColor();
+      this.setDefaultActiveFont();
     },
   },
 };

@@ -9,7 +9,7 @@
       @click="setActiveFont(font)"
       v-for="font in this.fonts"
       :key="font.woffUrl"
-    >{{ textValue }}</li>
+    >{{ notNullTextValue }}</li>
   </ul>
 </div>
 </template>
@@ -20,7 +20,11 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'ConstructFontsList',
   computed: {
-    ...mapGetters(['fonts', 'textValue']),
+    ...mapGetters([
+      'fonts',
+      'textValue',
+      'notNullTextValue',
+    ]),
   },
   created() {
     for (let i = 0; i < this.fonts.length; i++) {

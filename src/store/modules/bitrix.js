@@ -9,9 +9,6 @@ export default {
     bitrixToken: 'vwcq63ft1wnt8w66',
   },
   getters: {
-    bitrixBaseUrl(state) {
-      return `https://${state.bitrixDomen}.bitrix24.ru/rest/${state.bitrixUserId}/${state.bitrixToken}/crm.deal.add.json`;
-    },
     dealAddUrl(state, getters) {
       return `https://${state.bitrixDomen}.bitrix24.ru/rest/${state.bitrixUserId}/${state.bitrixToken}/crm.deal.add.json?${state.textFormCode}=${getters.textValue}&${state.colorFormCode}=${getters.activeColor.title}&${state.fontSizeFormCode}=${getters.fontSize}&${state.fontNameFormCode}=${getters.activeFont.name}`;
     },

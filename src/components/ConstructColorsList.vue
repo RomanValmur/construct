@@ -31,7 +31,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['colors', 'activeColorHexCode']),
+    ...mapGetters([
+      'colors',
+      'activeColorHexCode',
+    ]),
   },
   methods: {
     ...mapActions(['setActiveColor']),
