@@ -1,16 +1,14 @@
 <template>
-<div class="col-12 col-md-4">
-  <ul class="list-group">
-    <li
+<div class="col-12 col-lg-4">
+  <b-list-group>
+    <b-list-group-item
       class="list-group-item font-name"
-      :style="{
-        fontFamily : `${font.name}`,
-      }"
+      :style="{ fontFamily : `${font.name}` }"
       @click="setActiveFont(font)"
       v-for="font in this.fonts"
       :key="font.woffUrl"
-    >{{ notNullTextValue }}</li>
-  </ul>
+    >{{ defaultTextValue }}</b-list-group-item>
+  </b-list-group>
 </div>
 </template>
 
@@ -23,7 +21,7 @@ export default {
     ...mapGetters([
       'fonts',
       'textValue',
-      'notNullTextValue',
+      'defaultTextValue',
     ]),
   },
   created() {
@@ -47,7 +45,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .font-name:hover {
   cursor: pointer;
 }

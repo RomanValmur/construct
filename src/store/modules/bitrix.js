@@ -10,7 +10,7 @@ export default {
   },
   getters: {
     dealAddUrl(state, getters) {
-      return `https://${state.bitrixDomen}.bitrix24.ru/rest/${state.bitrixUserId}/${state.bitrixToken}/crm.deal.add.json?${state.textFormCode}=${getters.textValue}&${state.colorFormCode}=${getters.activeColor.title}&${state.fontSizeFormCode}=${getters.fontSize}&${state.fontNameFormCode}=${getters.activeFont.name}`;
+      return `https://${state.bitrixDomen}.bitrix24.ru/rest/${state.bitrixUserId}/${state.bitrixToken}/crm.deal.add.json?${state.textFormCode}=${getters.formattedTextValue}&${state.colorFormCode}=${getters.activeColor.title}&${state.fontSizeFormCode}=${getters.realFontSize}&${state.fontNameFormCode}=${getters.activeFontName}`;
     },
   },
   mutations: {

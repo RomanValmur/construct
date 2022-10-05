@@ -1,55 +1,40 @@
 <template>
-  <div class="container">
-    <b-form-group
-      label="Мне нужна надпись: "
-      label-size="lg"
-      label-for="text"
-    >
-      <b-form-textarea
-        ref="text"
-        id="text"
-        placeholder="Введите надпись..."
-        rows="0"
-        max-rows="6"
-        @input="this.updateTextValue"
-        v-model="textValue"
-      >{{textValue}}</b-form-textarea>
+  <b-container>
+    <b-form-group label="Мне нужна надпись: " label-size="lg" label-for="text">
+      <b-form-textarea ref="text" id="text" placeholder="Введите надпись..." rows="0" max-rows="6"
+      @input="this.updateTextValue" v-model="textValue">{{textValue}}</b-form-textarea>
     </b-form-group>
-    <ConstructSurfaces/>
-    <div class="row my-5">
-      <ConstructColorsList/>
-      <ConstructExemplar/>
-      <ConstructFontsList/>
+    <construct-surfaces/>
+    <div class="row my-3">
+      <div class="col-12 col-lg-8">
+        <construct-preview/>
+        <construct-settings class="d-flex justify-content-center col-12 mb-3"/>
+      </div>
+      <construct-fonts-list/>
     </div>
     <div class="row">
-      <div class="col d-flex justify-content-around mb-5">
-        <div
-          class="btn btn-danger"
-          @click="resetConstruct"
-        >Сбросить</div>
-        <div
-          class="btn btn-primary"
-          @click="addNewDealToBitrix(), resetConstruct()"
-        >Отправить</div>
+      <div class="col d-flex justify-content-around my-3">
+        <div class="btn btn-danger" @click="resetConstruct">Сбросить</div>
+        <div class="btn btn-primary" @click="addNewDealToBitrix(), resetConstruct()">Отправить</div>
       </div>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import ConstructExemplar from './ConstructExemplar.vue';
+import ConstructPreview from './ConstructPreview.vue';
 import ConstructFontsList from './ConstructFontsList.vue';
-import ConstructColorsList from './ConstructColorsList.vue';
 import ConstructSurfaces from './ConstructSurfaces.vue';
+import ConstructSettings from './ConstructSettings.vue';
 
 export default {
   name: 'ConstructOrder',
   components: {
-    ConstructExemplar,
+    ConstructPreview,
     ConstructFontsList,
-    ConstructColorsList,
     ConstructSurfaces,
+    ConstructSettings,
   },
   computed: {
     ...mapGetters([
@@ -88,5 +73,5 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 </style>

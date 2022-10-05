@@ -1,10 +1,10 @@
 <template>
 <div class="row flex-nowrap justify-content-around overflow-auto">
   <div
-    class="col-3 col-md-1 mx-2"
+    class="col-3 col-md-1 mx-2 surface"
     v-for="surface in surfaces"
     :key="surface.title"
-    :style="{ background: `url(${surface.image}) center center no-repeat`, ...styleSurface}"
+    :style="{ backgroundImage: `url(${surface.image})` }"
     @click.prevent="setActiveSurface(surface)"
   >
   </div>
@@ -16,14 +16,6 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'ConstructSurfaces',
-  data() {
-    return {
-      styleSurface: {
-        backgroundSize: 'contain',
-        height: '100px',
-      },
-    };
-  },
   computed: {
     ...mapGetters(['surfaces']),
   },
@@ -33,5 +25,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .surface {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100px;
+  }
 </style>

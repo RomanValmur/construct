@@ -1,18 +1,16 @@
 <template>
-<div class="col-2 col-md-1">
-  <ul class="list-group">
-    <li
-      class="list-group-item"
-      v-for="color in colors"
-      :key="color.hexCode"
-      :style="{ backgroundColor: `${color.hexCode}`, ...styleColorItem}"
-      :alt="color.title"
-      :title="color.title"
-      @click.prevent="setActiveColor(color)"
-    >
-    </li>
-  </ul>
-</div>
+<div class="col-12 text-center justify-content-center color-list">
+    <b-list-group class="d-flex justify-content-center" horizontal>
+      <b-list-group-item
+        v-for="color in colors"
+        :key="color.hexCode"
+        :style="{ backgroundColor: `${color.hexCode}` }"
+        :alt="color.title"
+        :title="color.title"
+        @click.prevent="setActiveColor(color)"
+      ></b-list-group-item>
+    </b-list-group>
+  </div>
 </template>
 
 <script>
@@ -20,20 +18,9 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'ConstructColorsList',
-  data() {
-    return {
-      styleColorItem: {
-        height: '50px',
-        width: '50px',
-        margin: '2px',
-        cursor: 'pointer',
-      },
-    };
-  },
   computed: {
     ...mapGetters([
       'colors',
-      'activeColorHexCode',
     ]),
   },
   methods: {
@@ -42,5 +29,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.list-group-item {
+  height: 50px;
+  width: 50px;
+  margin: 2px;
+  cursor: pointer;
+}
 </style>

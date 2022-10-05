@@ -1,15 +1,12 @@
 <template>
   <div
-    class="
-      col-12
-      col-md-7
-      text-center
-      d-flex
-      align-items-center
-      justify-content-center
-      exemplar"
+    class="col-12 text-center d-flex align-items-center justify-content-center exemplar"
     ref="exemplar"
-    :style="{ backgroundImage: `url(${activeSurfaceImage})` }"
+    :style="{
+      backgroundImage: `url(${activeSurfaceImage})`,
+      height: `${clientDeviceWidth}px`,
+      maxHeight: '600px',
+    }"
     @pointerup="setIsDragFalse"
     @pointermove="relocateText($event)"
     @touchmove="touchRelocateText($event)"
@@ -34,50 +31,9 @@
           fontFamily: `${activeFont.name}`,
         }"
       >
-      {{ notNullTextValue }}
+        {{ defaultTextValue }}
       </span>
     </div>
-    <ul
-      id="fontSettings"
-      class="list-group"
-    >
-      <li class="list-group-item">
-        <label
-          for="fontSizeRange"
-        >
-        Размер шрифта:
-        </label>
-        <b-form-input
-          id="fontSizeRange"
-          ref="fontSizeRange"
-          type="range"
-          min="16"
-          max="128"
-          step="1"
-          value="72"
-          @input="this.updateFontSize"
-          v-model="fontSize"
-        ></b-form-input>
-      </li>
-      <li class="list-group-item">
-        <label
-          for="lineHeightRange"
-        >
-          Межстрочный интервал:
-        </label>
-        <b-form-input
-          id="lineHeightRange"
-          ref="lineHeightRange"
-          type="range"
-          min="16"
-          max="128"
-          step="1"
-          value="72"
-          @input="this.updateLineHeight"
-          v-model="lineHeight"
-        ></b-form-input>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -99,14 +55,14 @@ export default {
       'activeSurfaceImage',
       'activeColorHexCode',
       'textValue',
-      'fontSize',
-      'lineHeight',
       'activeFont',
-      'notNullTextValue',
+      'defaultTextValue',
+      'formattedTextValue',
+      'clientDeviceWidth',
     ]),
     fontSize: {
       get() {
-        return this.$store.getters.fontSize;
+        return this.$store.getters.normalizedFontSize;
       },
       set(value) {
         this.$store.commit('updateFontSize', value);
@@ -228,52 +184,31 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+
 .exemplar {
   overflow: hidden;
-  height: 600px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
-}
 
-.exemplar__span {
-  touch-action: none;
-  white-space: pre-line;
-  position: relative;
-  font-size: 4.5rem;
-  line-height: 4.5rem;
-  outline: none;
-  user-select: none;
-}
+  &__text {
+    min-height: 72px;
+    position: absolute;
+    max-width: 400px;
+    max-height: 560px;
+    text-align: center;
+    user-select: none;
+  }
 
-.exemplar__text {
-  min-height: 72px;
-  position: absolute;
-  max-width: 400px;
-  max-height: 560px;
-  text-align: center;
-  user-select: none;
-}
-
-#fontSettings {
-  opacity: 0.5;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40%;
-  user-select: none;
-}
-
-#fontSettings:hover {
-  opacity: 1;
-}
-
-input[type="range"] {
-  opacity: 0.5;
-}
-
-input[type="range"]:hover {
-  opacity: 1;
+  &__span {
+    touch-action: none;
+    white-space: pre-line;
+    position: relative;
+    font-size: 72px;
+    line-height: 72px;
+    outline: none;
+    user-select: none;
+  }
 }
 </style>

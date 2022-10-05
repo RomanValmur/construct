@@ -8,7 +8,7 @@ export default {
     textValue(state) {
       return state.textValue;
     },
-    notNullTextValue(state) {
+    defaultTextValue(state) {
       return state.textValue ? state.textValue : 'Введите текст';
     },
     fontSize(state) {
@@ -16,6 +16,15 @@ export default {
     },
     lineHeight(state) {
       return state.lineHeight;
+    },
+    formattedTextValue(state) {
+      return state.textValue.replace(/\s/g, ' ');
+    },
+    normalizedFontSize(state, getters) {
+      return state.fontSize * getters.clientDeviceWidthCoefficient;
+    },
+    realFontSize(state) {
+      return Math.ceil(state.fontSize * 2.15);
     },
   },
   mutations: {

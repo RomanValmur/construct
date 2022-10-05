@@ -12,6 +12,9 @@ export default {
     activeFont(state) {
       return state.activeFont;
     },
+    activeFontName(state) {
+      return state.activeFont.name;
+    },
   },
   mutations: {
     setActiveFont(state, font) {
