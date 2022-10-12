@@ -1,5 +1,5 @@
 <template>
-<div class="col-12 col-lg-4">
+<div>
   <b-list-group>
     <b-list-group-item
       class="list-group-item font-name"

@@ -1,6 +1,10 @@
 <template>
-  <div class="col-12 mb-3">
-    <b-tabs pills justified end>
+  <div>
+    <b-tabs class="overflow-auto" pills justified end>
+      <b-tab>
+        <template #title>⚪</template>
+        <construct-surfaces class="overflow-auto d-flex"/>
+      </b-tab>
       <b-tab>
         <template #title><b-icon-palette/></template>
         <construct-colors-list/>
@@ -51,6 +55,7 @@
 import { BIconPalette, BIconFonts, BIconArrowDownUp } from 'bootstrap-vue';
 import { mapActions } from 'vuex';
 import ConstructColorsList from './ConstructColorsList.vue';
+import ConstructSurfaces from './ConstructSurfaces.vue';
 
 export default {
   name: 'ConstructSettings',
@@ -59,6 +64,7 @@ export default {
     BIconFonts,
     BIconArrowDownUp,
     ConstructColorsList,
+    ConstructSurfaces,
   },
   computed: {
     fontSize: {

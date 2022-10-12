@@ -1,14 +1,14 @@
 <template>
-<div class="row flex-nowrap justify-content-around overflow-auto">
-  <div
-    class="col-3 col-md-1 mx-2 surface"
+<b-list-group horizontal>
+  <b-list-group-item
     v-for="surface in surfaces"
     :key="surface.title"
     :style="{ backgroundImage: `url(${surface.image})` }"
+    :alt="surface.title"
+    :title="surface.title"
     @click.prevent="setActiveSurface(surface)"
-  >
-  </div>
-</div>
+  ></b-list-group-item>
+</b-list-group>
 </template>
 
 <script>
@@ -26,10 +26,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .surface {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100px;
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.list-group-item {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.list-group {
+  &::-webkit-scrollbar {
+    height: 5px;
   }
+
+  &::-webkit-scrollbar-track {
+    background: $light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary;
+    border-radius: 50px;
+    border: 3px solid $primary;
+  }
+}
 </style>

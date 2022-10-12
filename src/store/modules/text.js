@@ -23,6 +23,9 @@ export default {
     normalizedFontSize(state, getters) {
       return state.fontSize * getters.clientDeviceWidthCoefficient;
     },
+    normalizedLineHeight(state, getters) {
+      return state.lineHeight * getters.clientDeviceWidthCoefficient;
+    },
     realFontSize(state) {
       return Math.ceil(state.fontSize * 2.15);
     },

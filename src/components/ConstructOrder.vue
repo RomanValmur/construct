@@ -2,15 +2,16 @@
   <b-container>
     <b-form-group label="Мне нужна надпись: " label-size="lg" label-for="text">
       <b-form-textarea ref="text" id="text" placeholder="Введите надпись..." rows="0" max-rows="6"
-      @input="this.updateTextValue" v-model="textValue">{{textValue}}</b-form-textarea>
+      @input="this.updateTextValue" v-model="textValue"
+      class="b-form-group">{{textValue}}</b-form-textarea>
     </b-form-group>
-    <construct-surfaces/>
     <div class="row my-3">
       <div class="col-12 col-lg-8">
-        <construct-preview/>
-        <construct-settings class="d-flex justify-content-center col-12 mb-3"/>
+        <construct-preview class="col-12 text-center d-flex align-items-center
+        justify-content-center preview"/>
+        <construct-settings class="col-12 d-flex justify-content-center mb-3"/>
       </div>
-      <construct-fonts-list/>
+      <construct-fonts-list class="col-12 col-lg-4 construct-fonts-list"/>
     </div>
     <div class="row">
       <div class="col d-flex justify-content-around my-3">
@@ -25,7 +26,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import ConstructPreview from './ConstructPreview.vue';
 import ConstructFontsList from './ConstructFontsList.vue';
-import ConstructSurfaces from './ConstructSurfaces.vue';
 import ConstructSettings from './ConstructSettings.vue';
 
 export default {
@@ -33,7 +33,6 @@ export default {
   components: {
     ConstructPreview,
     ConstructFontsList,
-    ConstructSurfaces,
     ConstructSettings,
   },
   computed: {
@@ -74,4 +73,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.construct-fonts-list {
+  max-height: 600px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary;
+    border-radius: 50px;
+    border: 3px solid $primary;
+  }
+}
+
+.b-form-group {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary;
+    border-radius: 50px;
+    border: 3px solid $primary;
+  }
+}
+
+.preview {
+  overflow: hidden;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div
-    class="col-12 text-center d-flex align-items-center justify-content-center exemplar"
-    ref="exemplar"
+    ref="preview"
     :style="{
       backgroundImage: `url(${activeSurfaceImage})`,
       height: `${clientDeviceWidth}px`,
@@ -13,8 +12,8 @@
     @touchend="setIsDragFalse"
   >
     <div
-      class="exemplar__text"
-      ref="exemplar__text"
+      class="preview__text"
+      ref="preview__text"
       :isDrag=isDrag
       :isUsed=isUsed
       @pointerdown="pointerDownEvent"
@@ -22,8 +21,8 @@
       @touchmove.prevent
     >
       <span
-        class="exemplar__span"
-        ref="exemplar__span"
+        class="preview__span"
+        ref="preview__span"
         :style="{
           color: `${activeColorHexCode}`,
           fontSize: `${fontSize}px`,
@@ -41,7 +40,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'ConstructExemplar',
+  name: 'ConstructPreview',
   data() {
     return {
       isDrag: false,
@@ -70,7 +69,7 @@ export default {
     },
     lineHeight: {
       get() {
-        return this.$store.getters.lineHeight;
+        return this.$store.getters.normalizedLineHeight;
       },
       set(value) {
         this.$store.commit('updateLineHeight', value);
@@ -91,92 +90,92 @@ export default {
       this.isUsed = true;
     },
     caclShifts(event) {
-      const EXEMPLARTEXT = this.$refs.exemplar__text;
-      this.shiftX = event.clientX - EXEMPLARTEXT.getBoundingClientRect().left;
-      this.shiftY = event.clientY - EXEMPLARTEXT.getBoundingClientRect().top;
+      const PREVIEWTEXT = this.$refs.preview__text;
+      this.shiftX = event.clientX - PREVIEWTEXT.getBoundingClientRect().left;
+      this.shiftY = event.clientY - PREVIEWTEXT.getBoundingClientRect().top;
     },
     setIsDragFalse() {
       this.isDrag = false;
     },
     touchRelocateText(event) {
-      const EXEMPLAR = this.$refs.exemplar;
-      const EXEMPLARTEXT = this.$refs.exemplar__text;
+      const PREVIEW = this.$refs.preview;
+      const PREVIEWTEXT = this.$refs.preview__text;
       const limits = {
-        left: EXEMPLAR.getBoundingClientRect().left,
-        top: EXEMPLAR.getBoundingClientRect().top,
-        right: EXEMPLAR.getBoundingClientRect().right,
-        bottom: EXEMPLAR.getBoundingClientRect().bottom,
+        left: PREVIEW.getBoundingClientRect().left,
+        top: PREVIEW.getBoundingClientRect().top,
+        right: PREVIEW.getBoundingClientRect().right,
+        bottom: PREVIEW.getBoundingClientRect().bottom,
       };
-      const EXEMPLARTEXTWIDTH = EXEMPLARTEXT.getBoundingClientRect().width;
-      const EXEMPLARTEXTHEIGHT = EXEMPLARTEXT.getBoundingClientRect().height;
+      const PREVIEWTEXTWIDTH = PREVIEWTEXT.getBoundingClientRect().width;
+      const PREVIEWTEXTHEIGHT = PREVIEWTEXT.getBoundingClientRect().height;
       const touch = event.targetTouches[0];
 
       if (this.isDrag) {
-        EXEMPLARTEXT.style.position = 'absolute';
+        PREVIEWTEXT.style.position = 'absolute';
 
         const newLocation = {
           x: limits.left,
           y: limits.top,
         };
 
-        if (touch.clientX - this.shiftX + EXEMPLARTEXTWIDTH > limits.right) {
-          newLocation.x = limits.right - limits.left - EXEMPLARTEXTWIDTH;
+        if (touch.clientX - this.shiftX + PREVIEWTEXTWIDTH > limits.right) {
+          newLocation.x = limits.right - limits.left - PREVIEWTEXTWIDTH;
         } else if (touch.clientX - this.shiftX > limits.left) {
           newLocation.x = touch.clientX - limits.left - this.shiftX;
         } else if (touch.clientX - this.shiftX < limits.left) {
           newLocation.x = 0;
         }
 
-        if (touch.clientY - this.shiftY + EXEMPLARTEXTHEIGHT > limits.bottom) {
-          newLocation.y = limits.bottom - limits.top - EXEMPLARTEXTHEIGHT + this.shiftY;
+        if (touch.clientY - this.shiftY + PREVIEWTEXTHEIGHT > limits.bottom) {
+          newLocation.y = limits.bottom - limits.top - PREVIEWTEXTHEIGHT + this.shiftY;
         } else if (touch.clientY - this.shiftY > limits.top) {
           newLocation.y = touch.clientY - limits.top;
         } else if (touch.clientY - this.shiftY < limits.top) {
           newLocation.y = this.shiftY;
         }
 
-        EXEMPLARTEXT.style.left = `${newLocation.x}px`;
-        EXEMPLARTEXT.style.top = `${newLocation.y - this.shiftY}px`;
+        PREVIEWTEXT.style.left = `${newLocation.x}px`;
+        PREVIEWTEXT.style.top = `${newLocation.y - this.shiftY}px`;
       }
     },
     relocateText(event) {
-      const EXEMPLAR = this.$refs.exemplar;
-      const EXEMPLARTEXT = this.$refs.exemplar__text;
+      const PREVIEW = this.$refs.preview;
+      const PREVIEWTEXT = this.$refs.preview__text;
       const limits = {
-        left: EXEMPLAR.getBoundingClientRect().left,
-        top: EXEMPLAR.getBoundingClientRect().top,
-        right: EXEMPLAR.getBoundingClientRect().right,
-        bottom: EXEMPLAR.getBoundingClientRect().bottom,
+        left: PREVIEW.getBoundingClientRect().left,
+        top: PREVIEW.getBoundingClientRect().top,
+        right: PREVIEW.getBoundingClientRect().right,
+        bottom: PREVIEW.getBoundingClientRect().bottom,
       };
-      const EXEMPLARTEXTWIDTH = EXEMPLARTEXT.getBoundingClientRect().width;
-      const EXEMPLARTEXTHEIGHT = EXEMPLARTEXT.getBoundingClientRect().height;
+      const PREVIEWTEXTWIDTH = PREVIEWTEXT.getBoundingClientRect().width;
+      const PREVIEWTEXTHEIGHT = PREVIEWTEXT.getBoundingClientRect().height;
 
       if (this.isDrag) {
-        EXEMPLARTEXT.style.position = 'absolute';
+        PREVIEWTEXT.style.position = 'absolute';
 
         const newLocation = {
           x: limits.left,
           y: limits.top,
         };
 
-        if (event.clientX - this.shiftX + EXEMPLARTEXTWIDTH > limits.right) {
-          newLocation.x = limits.right - limits.left - EXEMPLARTEXTWIDTH;
+        if (event.clientX - this.shiftX + PREVIEWTEXTWIDTH > limits.right) {
+          newLocation.x = limits.right - limits.left - PREVIEWTEXTWIDTH;
         } else if (event.clientX - this.shiftX > limits.left) {
           newLocation.x = event.clientX - limits.left - this.shiftX;
         } else if (event.clientX - this.shiftX < limits.left) {
           newLocation.x = 0;
         }
 
-        if (event.clientY - this.shiftY + EXEMPLARTEXTHEIGHT > limits.bottom) {
-          newLocation.y = limits.bottom - limits.top - EXEMPLARTEXTHEIGHT + this.shiftY;
+        if (event.clientY - this.shiftY + PREVIEWTEXTHEIGHT > limits.bottom) {
+          newLocation.y = limits.bottom - limits.top - PREVIEWTEXTHEIGHT + this.shiftY;
         } else if (event.clientY - this.shiftY > limits.top) {
           newLocation.y = event.clientY - limits.top;
         } else if (event.clientY - this.shiftY < limits.top) {
           newLocation.y = this.shiftY;
         }
 
-        EXEMPLARTEXT.style.left = `${newLocation.x}px`;
-        EXEMPLARTEXT.style.top = `${newLocation.y - this.shiftY}px`;
+        PREVIEWTEXT.style.left = `${newLocation.x}px`;
+        PREVIEWTEXT.style.top = `${newLocation.y - this.shiftY}px`;
       }
     },
   },
@@ -186,11 +185,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.exemplar {
-  overflow: hidden;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain;
+.preview {
 
   &__text {
     min-height: 72px;

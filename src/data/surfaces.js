@@ -1,14 +1,90 @@
 export default [
   {
-    title: 'Buble',
+    title: 'Бабл',
     image: '/images/buble.webp',
   },
   {
-    title: 'Star',
+    title: 'Звезда',
     image: '/images/star.webp',
   },
   {
-    title: 'Heart',
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
+    image: '/images/heart.webp',
+  },
+  {
+    title: 'Сердце',
     image: '/images/heart.webp',
   },
 ];
