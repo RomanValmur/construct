@@ -98,7 +98,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .list-group-item:hover {
     cursor: pointer;
   }
